@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcFind";
+
+package FindApi;
+
+service Find {
+	rpc SearchWords(SearchRequest) returns (SearchResponse) {}
+}
+
+message SearchRequest {
+	string textId = 1;
+	repeated string words = 2;
+}
+
+message SearchResponse {
+	repeated string foundWords = 1;
+}

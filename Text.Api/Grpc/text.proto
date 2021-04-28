@@ -1,0 +1,51 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcText";
+
+package TextApi;
+
+service Text {
+	rpc GetTextById(TextRequest) returns (TextItemResponse) {}
+	rpc GetTextsAll(TextAllRequest) returns (TextAllResponse) {}
+	rpc SaveTextAsBinary(SaveTextAsBinaryRequest) returns (SaveTextResponse) {}
+	rpc SaveTextAsString(SaveTextAsStringRequest) returns (SaveTextResponse) {}
+	rpc SaveTextByUri(SaveTextByUriRequest) returns (SaveTextResponse) {}
+}
+
+
+
+message TextRequest {
+	string id = 1;
+}
+
+message TextItemResponse {
+	string id = 1;
+	string body = 2;
+}
+
+message TextAllRequest {
+}
+
+message TextAllResponse {
+
+	repeated TextItemResponse items = 1;
+}
+
+message SaveTextAsBinaryRequest{
+	bytes file = 1;
+}
+
+message SaveTextAsStringRequest{
+	string body = 1;
+}
+
+message SaveTextByUriRequest{
+	string uri = 1;
+}
+
+message SaveTextResponse{
+	bool result = 1;
+}
+
+
+

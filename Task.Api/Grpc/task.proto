@@ -1,0 +1,40 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/duration.proto";  
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcTask";
+
+package TaskApi;
+service Task {
+	rpc PutTask(TaskRequest) returns (.TaskApi.TaskResponse) {}
+	rpc GetResultsByTaskId(TaskResultsRequest) returns (.TaskApi.TaskResultsResponse) {}
+}
+
+message TaskRequest {
+
+	google.protobuf.Timestamp begin = 1;
+	
+	google.protobuf.Timestamp end = 2;
+
+	google.protobuf.Duration period = 3;
+	
+	repeated string words = 4;
+}
+
+message TaskResponse {
+	bool result = 1;
+}
+
+message TaskResultsRequest{
+	string taskId = 1;
+}
+
+message TaskResultResponse{
+	string textId = 1;
+	repeated string words = 2;
+}
+
+message TaskResultsResponse{
+	repeated TaskResultResponse items = 1;
+}
